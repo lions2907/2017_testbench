@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team2907.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2907.robot.subsystems.Camera;
 import org.usfirst.frc.team2907.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2907.robot.subsystems.ExampleSubsystem;
 
@@ -24,6 +25,7 @@ public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static final DriveTrain driveTrain = new DriveTrain();
+	public static final Camera camera = new Camera();
 	public static OI oi;
 
     Command autonomousCommand;

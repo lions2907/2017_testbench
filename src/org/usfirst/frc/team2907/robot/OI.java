@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
+import org.usfirst.frc.team2907.robot.commands.AlignWithPixy;
 import org.usfirst.frc.team2907.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2907.robot.commands.RotateToAngle;
 
@@ -15,10 +16,12 @@ public class OI {
 	public Joystick leftStick = new Joystick(0);
 	
 	public JoystickButton turnButton = new JoystickButton(leftStick, 1);
+	public JoystickButton alignButton = new JoystickButton(leftStick, 2);
 	
 	public OI()
 	{
-		turnButton.whenActive(new RotateToAngle(90));
+		turnButton.whenPressed(new RotateToAngle(Robot.driveTrain.sensorBoard.getAngle() + 90));
+		alignButton.whenPressed(new AlignWithPixy());
 	}
 	// // CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
