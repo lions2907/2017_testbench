@@ -2,8 +2,10 @@ package org.usfirst.frc.team2907.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import org.usfirst.frc.team2907.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2907.robot.commands.RotateToAngle;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -11,6 +13,13 @@ import org.usfirst.frc.team2907.robot.commands.ExampleCommand;
  */
 public class OI {
 	public Joystick leftStick = new Joystick(0);
+	
+	public JoystickButton turnButton = new JoystickButton(leftStick, 1);
+	
+	public OI()
+	{
+		turnButton.whenActive(new RotateToAngle(90));
+	}
 	// // CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	// joystick.
