@@ -13,13 +13,13 @@ public class AlignWithPixy extends CommandGroup
 	private static final double DEGREES_PER_PIXEL = 75 / 640; // 640x400 default at 75 FOV
 	public AlignWithPixy()
 	{
-		requires(Robot.camera);
-		Camera.PixyBlock[] blocks = Robot.camera.read();
-		if (blocks != null && blocks.length > 0)
-		{
-			double offset = (blocks[0].centerX - 320) * DEGREES_PER_PIXEL;
-			addSequential(new RotateToAngle(Robot.driveTrain.sensorBoard.getAngle() + offset));
-		}
+		//requires(Robot.camera);
+		//Camera.PixyBlock[] blocks = Robot.camera.read();
+//		if (blocks != null && blocks.length > 0)
+//		{
+//			double offset = (blocks[0].centerX - 320) * DEGREES_PER_PIXEL;
+//			//addSequential(new RotateToAngle(Robot.driveTrain.sensorBoard.getAngle() + offset));
+//		}
 		// Add Commands here:
 		// e.g. addSequential(new Command1());
 		// addSequential(new Command2());

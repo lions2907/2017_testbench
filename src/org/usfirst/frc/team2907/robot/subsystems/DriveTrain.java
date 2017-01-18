@@ -34,15 +34,17 @@ public class DriveTrain extends Subsystem
 		robotDrive = new RobotDrive(left1, left2, right1, right2);
 		try
 		{
-			sensorBoard = new AHRS(RobotMap.USB_NAVX);
+			sensorBoard = new AHRS(SPI.Port.kMXP);
 		} catch (Exception e)
 		{
 			System.out.println("Error instantating sensorBoard : " + e.getMessage());
 		}
+		
+		sensorBoard.reset();
 	}
 
     public void initDefaultCommand() {
-    	setDefaultCommand(new MechDrive());
+    	//setDefaultCommand(new MechDrive());
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }

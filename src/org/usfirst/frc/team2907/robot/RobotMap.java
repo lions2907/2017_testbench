@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2907.robot;
 
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SerialPort.Port;
 
 /**
@@ -9,13 +10,13 @@ import edu.wpi.first.wpilibj.SerialPort.Port;
  * floating around.
  */
 public class RobotMap {
-	public static final int TALON_LEFT_1 = 1;
-	public static final int TALON_LEFT_2 = 2;
+	public static final int TALON_LEFT_1 = 8;
+	public static final int TALON_LEFT_2 = 7;
 	public static final int TALON_RIGHT_1 = 3;
-	public static final int TALON_RIGHT_2 = 4;
+	public static final int TALON_RIGHT_2 = 2;
 	
-	public static final Port USB_NAVX = Port.kUSB1;
-	public static final Port USB_PIXY = Port.kUSB2;
+	public static final Port USB_NAVX = Port.kUSB2;
+	public static final Port USB_PIXY = SerialPort.Port.kUSB;
     // For example to map the left and right motors, you could define the
     // following variables to use with your drivetrain subsystem.
     // public static int leftMotor = 1;

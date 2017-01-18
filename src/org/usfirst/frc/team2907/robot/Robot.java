@@ -25,7 +25,7 @@ public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static final DriveTrain driveTrain = new DriveTrain();
-	public static final Camera camera = new Camera();
+	//public static final Camera camera = new Camera();
 	public static OI oi;
 
     Command autonomousCommand;

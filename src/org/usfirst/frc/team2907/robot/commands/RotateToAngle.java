@@ -28,7 +28,7 @@ public class RotateToAngle extends Command {
 		output = new PIDOutput();
 		pidController = new PIDController(kP, kI, kD, Robot.driveTrain.sensorBoard, output);
 		pidController.setInputRange(-180, 180);
-		pidController.setOutputRange(-1, 1);
+		pidController.setOutputRange(-.5, .5);
 		pidController.setAbsoluteTolerance(kToleranceDegrees);
 		pidController.setContinuous(true);
 		
@@ -67,7 +67,10 @@ public class RotateToAngle extends Command {
 	{
 
 		public void pidWrite(double output) {
-			Robot.driveTrain.mechDrive(Robot.oi.leftStick.getX(), Robot.oi.leftStick.getY(), output, Robot.driveTrain.sensorBoard.getAngle());
+			System.out.println("output : " + output);
+			System.out.println("angle : " + Robot.driveTrain.sensorBoard.getAngle());
+			Robot.driveTrain.robotDrive.arcadeDrive(0, output);
+			//Robot.driveTrain.mechDrive(Robot.oi.leftStick.getX(), Robot.oi.leftStick.getY(), output, Robot.driveTrain.sensorBoard.getAngle());
 		}
 		
 	}

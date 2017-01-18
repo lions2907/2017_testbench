@@ -17,14 +17,14 @@ public class AlignWithCamera extends Command
 	public AlignWithCamera()
 	{
 		super("AlignWithCamera");
-		requires(Robot.driveTrain);
-		requires(Robot.camera);
-		Camera.PixyBlock[] blocks = Robot.camera.read();
-		if (blocks != null && blocks.length > 0)
-		{
-			offset = (blocks[0].centerX - 320) * DEGREES_PER_PIXEL;
-			inRange = true;
-		}
+		//requires(Robot.driveTrain);
+//		requires(Robot.camera);
+//		Camera.PixyBlock[] blocks = Robot.camera.read();
+//		if (blocks != null && blocks.length > 0)
+//		{
+//			offset = (blocks[0].centerX - 320) * DEGREES_PER_PIXEL;
+//			inRange = true;
+//		}
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 	}
@@ -34,7 +34,7 @@ public class AlignWithCamera extends Command
 	{
 		if (inRange)
 		{
-			new RotateToAngle(Robot.driveTrain.sensorBoard.getAngle() + offset);
+			//new RotateToAngle(Robot.driveTrain.sensorBoard.getAngle() + offset);
 		}
 	}
 

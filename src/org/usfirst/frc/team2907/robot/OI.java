@@ -21,7 +21,8 @@ public class OI {
 	public OI()
 	{
 		turnButton.whenPressed(new RotateToAngle(Robot.driveTrain.sensorBoard.getAngle() + 90));
-		alignButton.whenPressed(new AlignWithPixy());
+
+		//alignButton.whenPressed(new AlignWithPixy());
 	}
 	// // CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a

@@ -3,6 +3,7 @@ package org.usfirst.frc.team2907.robot.subsystems;
 import org.usfirst.frc.team2907.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -16,7 +17,12 @@ public class Camera extends Subsystem
 
 	public Camera()
 	{
-		port = new SerialPort(0, RobotMap.USB_PIXY);
+		try {
+			port = new SerialPort(8, Port.kUSB2);
+		} catch (Exception e)
+		{
+			System.out.println("e : " + e.getLocalizedMessage());
+		}
 	}
 
 	public void initDefaultCommand()
