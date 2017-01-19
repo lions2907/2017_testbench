@@ -28,7 +28,7 @@ public class Camera extends Subsystem
 		{
 			System.out.println("e : " + e.getLocalizedMessage());
 		}
-		read();
+		//read();
 	}
 
 	public void initDefaultCommand()
@@ -55,19 +55,23 @@ public class Camera extends Subsystem
 			if (b2 < 0)
 				b2 += 256;
 			
-			System.out.println("byte : " + b1); //bytes[byteOffset]);
+			//System.out.println("byte : " + b1); //bytes[byteOffset]);
 			if (b1 == 0x55 && b2 == 0xaa)
 			{
 				System.out.println("recieved sync block : " + bytes[byteOffset]);
 				// copy block into temp buffer
 				byte[] temp = new byte[BLOCK_SIZE];
 				for (int tempOffset = 0; tempOffset < BLOCK_SIZE; ++tempOffset)
+				{
 					temp[tempOffset] = bytes[byteOffset + tempOffset];
+					System.out.println("read byte : " + temp[tempOffset]);
+				}
 
 				PixyBlock block = bytesToBlock(temp);
 				if (block != null)
 				{
 					pixyBlocks[index++] = block;
+					System.out.println("Block x : " + block.centerX + ", block y : " + block.centerY);
 					byteOffset += BLOCK_SIZE - 1;
 				}
 			} else 			 
@@ -84,8 +88,8 @@ public class Camera extends Subsystem
 		
 		// if the checksum is 0 or the checksum is a sync byte, then there
         // are no more frames.
-		if (pixyBlock.checksum == 0 || pixyBlock.checksum == 0xaa55)
-			return null;
+//		if (pixyBlock.checksum == 0 || pixyBlock.checksum == 0xaa55)
+//			return null;
 		
 		pixyBlock.signature = bytesToInt(bytes[5], bytes[4]);
 		pixyBlock.centerX = bytesToInt(bytes[7], bytes[6]);
