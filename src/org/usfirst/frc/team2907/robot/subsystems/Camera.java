@@ -3,6 +3,7 @@ package org.usfirst.frc.team2907.robot.subsystems;
 import org.usfirst.frc.team2907.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -14,16 +15,20 @@ public class Camera extends Subsystem
 {
 	public static final int MAX_BLOCKS = 20;
 	public static final int BLOCK_SIZE = 14;
+//	private SPI port;
 	private I2C port;
 
 	public Camera()
 	{
 		try {
-			port = new I2C(edu.wpi.first.wpilibj.I2C.Port.kOnboard, 0x54);
+			port = new I2C(I2C.Port.kOnboard, 0x54);
+			//port = new SPI(SPI.Port.kOnboardCS0);
+			//port.setSampleDataOnFalling();
 		} catch (Exception e)
 		{
 			System.out.println("e : " + e.getLocalizedMessage());
 		}
+		read();
 	}
 
 	public void initDefaultCommand()
@@ -35,9 +40,11 @@ public class Camera extends Subsystem
 		PixyBlock[] pixyBlocks = new PixyBlock[MAX_BLOCKS];
 		int index = 0;
 		byte[] bytes = new byte[BLOCK_SIZE * MAX_BLOCKS];
-		port.read(0x54, BLOCK_SIZE * MAX_BLOCKS, bytes);
-		System.out.println("Bytes read : " + bytes);
-		for (int byteOffset = 0; byteOffset < bytes.length - BLOCK_SIZE - 1;)
+		port.read(0x54, MAX_BLOCKS * BLOCK_SIZE,  bytes);
+		//int result = port.read(true, bytes, BLOCK_SIZE * MAX_BLOCKS);
+		//System.out.println("bytes read : " + result);
+		//System.out.println("Bytes read : " + bytes);
+		for (int byteOffset = 0; byteOffset < BLOCK_SIZE * MAX_BLOCKS - 1; )
 		{
 			// checking for sync block
 			int b1 = bytes[byteOffset];
@@ -48,8 +55,10 @@ public class Camera extends Subsystem
 			if (b2 < 0)
 				b2 += 256;
 			
+			System.out.println("byte : " + b1); //bytes[byteOffset]);
 			if (b1 == 0x55 && b2 == 0xaa)
 			{
+				System.out.println("recieved sync block : " + bytes[byteOffset]);
 				// copy block into temp buffer
 				byte[] temp = new byte[BLOCK_SIZE];
 				for (int tempOffset = 0; tempOffset < BLOCK_SIZE; ++tempOffset)
@@ -60,9 +69,9 @@ public class Camera extends Subsystem
 				{
 					pixyBlocks[index++] = block;
 					byteOffset += BLOCK_SIZE - 1;
-				} else 
-					++byteOffset;
-			}
+				}
+			} else 			 
+			++byteOffset;
 		}
 		return pixyBlocks;
 	}

@@ -20,9 +20,9 @@ public class OI {
 	
 	public OI()
 	{
-		turnButton.whenPressed(new RotateToAngle(Robot.driveTrain.sensorBoard.getAngle() + 90));
+		//turnButton.whenPressed(new RotateToAngle(Robot.driveTrain.sensorBoard.getAngle() + 90));
 
-		//alignButton.whenPressed(new AlignWithPixy());
+		turnButton.whenPressed(new ExampleCommand());
 	}
 	// // CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
