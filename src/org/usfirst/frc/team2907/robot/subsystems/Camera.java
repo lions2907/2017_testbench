@@ -71,10 +71,12 @@ public class Camera extends Subsystem
 				if (block != null)
 				{
 					pixyBlocks[index++] = block;
-					System.out.println("Block width : " + block.width + ", block height : " + block.height);
-					System.out.println("Block x : " + block.centerX + ", block y : " + block.centerY);
+					//System.out.println("Block width : " + block.width + ", block height : " + block.height);
+					//System.out.println("Block x : " + block.centerX + ", block y : " + block.centerY);
 					byteOffset += BLOCK_SIZE - 1;
-				}
+				} else 
+					
+					++byteOffset;
 			} else 			 
 			++byteOffset;
 		}
@@ -92,13 +94,27 @@ public class Camera extends Subsystem
 //		if (pixyBlock.checksum == 0 || pixyBlock.checksum == 0xaa55)
 //			return null;
 		
-		pixyBlock.signature = bytesToInt(bytes[5], bytes[4]);
-		pixyBlock.centerX = bytesToInt(bytes[7], bytes[6]);
-		pixyBlock.centerY = bytesToInt(bytes[9], bytes[8]);
-		pixyBlock.width = bytesToInt(bytes[11], bytes[10]);
-		pixyBlock.height = bytesToInt(bytes[13], bytes[12]);
+//		pixyBlock.signature = bytesToInt(bytes[5], bytes[4]);
+//		pixyBlock.centerX = bytesToInt(bytes[7], bytes[6]);
+//		pixyBlock.centerY = bytesToInt(bytes[9], bytes[8]);
+//		pixyBlock.width = bytesToInt(bytes[11], bytes[10]);
+//		pixyBlock.height = bytesToInt(bytes[13], bytes[12]);
+		
+		System.out.println("centerx byte b1 : " + bytes[7] + ", b2 : " + bytes[6]);
+		
+		pixyBlock.signature = orBytes(bytes[5], bytes[4]);
+		pixyBlock.centerX = orBytes(bytes[7], bytes[6]);
+		pixyBlock.centerY = orBytes(bytes[9], bytes[8]);
+		pixyBlock.width = orBytes(bytes[11], bytes[10]);
+		pixyBlock.height = orBytes(bytes[13], bytes[12]);
 		return pixyBlock;
 	}
+	
+	public int orBytes(byte b1, byte b2)
+	{
+		return (b1 & 0xff) | (b2 & 0xff);
+	}
+	
 	
 	public int bytesToInt(int b1, int b2)
 	{
@@ -122,6 +138,14 @@ public class Camera extends Subsystem
 		// 8, 9 4 y center of object
 		// 10, 11 5 width of object
 		// 12, 13 6 height of object
+		
+//		 read byte : 85  read byte : -86 
+//		 read byte : 85  read byte : -86 
+//		 read byte : 22  read byte : 1 
+//		 read byte : 1   read byte : 0 
+//		 read byte : -128 read byte : 0 
+//		 read byte : 118 read byte : 0 
+//		 read byte : 22 read byte : 0 
 
 		public int sync;
 		public int checksum;
