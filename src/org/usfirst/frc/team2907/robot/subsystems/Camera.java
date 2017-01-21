@@ -103,10 +103,10 @@ public class Camera extends Subsystem
 		System.out.println("centerx byte b1 : " + bytes[7] + ", b2 : " + bytes[6]);
 		
 		pixyBlock.signature = orBytes(bytes[5], bytes[4]);
-		pixyBlock.centerX = orBytes(bytes[7], bytes[6]);
-		pixyBlock.centerY = orBytes(bytes[9], bytes[8]);
-		pixyBlock.width = orBytes(bytes[11], bytes[10]);
-		pixyBlock.height = orBytes(bytes[13], bytes[12]);
+		pixyBlock.centerX = (((bytes[7] & 0xff) << 8) | (bytes[6] & 0xff));
+		pixyBlock.centerY = (((bytes[9] & 0xff) << 8) | (bytes[8] & 0xff));
+		pixyBlock.width = (((bytes[11] & 0xff) << 8) | (bytes[10] & 0xff));
+		pixyBlock.height = (((bytes[13] & 0xff) << 8) | (bytes[12] & 0xff));
 		return pixyBlock;
 	}
 	
