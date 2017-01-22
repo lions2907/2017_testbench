@@ -66,9 +66,9 @@ public class Camera extends Subsystem
 			{
 				//System.out.println("\n" + bytes[byteOffset]);
 				// copy block into temp buffer
-				byte[] temp = new byte[BLOCK_SIZE];
+				byte[] temp = new byte[BLOCK_SIZE + 2];
 				StringBuilder sb = new StringBuilder("Data : ");
-				for (int tempOffset = 0; tempOffset < BLOCK_SIZE; ++tempOffset)
+				for (int tempOffset = 0; tempOffset < BLOCK_SIZE + 2; ++tempOffset)
 				{
 					temp[tempOffset] = bytes[byteOffset + tempOffset];
 					sb.append(temp[tempOffset] + ", ");
